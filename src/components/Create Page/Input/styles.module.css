@@ -1,0 +1,22 @@
+input {
+  background-color: transparent;
+
+  border: none;
+  margin-left: 0.90rem ;
+
+  font-weight: 300;
+  color: #a6a6a6;
+  text-decoration: none;
+  font-family: "Roboto-Slab", serif;
+}
+
+:global(#title) {
+  width:18rem;
+  margin-top: 2.70rem;  
+  font-size: 1.9rem;
+  }
+
+:global(#description) {
+  margin-top: 1.5rem;  
+  font-size: 1.5rem;
+}
