@@ -1,10 +1,18 @@
 .container{
     width: 23rem;
     height: 100vh;
-    background-color: #101010;   
+    background-color: #1A1A1A;   
     padding-right: 2rem;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.noTasks{
+  margin-top: 2rem;
+  text-indent: 0.6rem;
+  margin-left: 2.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .container::-webkit-scrollbar{
@@ -26,14 +34,19 @@
 }
 .cardTasks{
    display: flex;
-
+   position: relative;
+   flex-wrap: wrap;
    width: 21.8rem;
    height: 4.3rem;
    border-radius: 0.8rem;
    background-color: #1C1C1C;
-
+   overflow-wrap:anywhere;
    margin-top: 1.2rem;
    margin-left: 0.70rem;
+}
+
+.contentContainer{
+  display: flex;
 }
 
 .colorIndicator{
@@ -44,32 +57,33 @@
 }
 
 .taskContent{
-    margin-left: 0.4rem;
-    margin-top: 0.4rem;
-}
-
-h2{
-    font-family: "Roboto slab", serif;
-    font-size: 2.2rem;
-    font-weight: 200;
-    color: #f0f0f0;
-
-    margin-left:1rem;
-    margin-top:2.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 h3{
-    font-family: "Roboto", serif;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-family: "Manrope", sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
     color: #f0f0f0;
 }
 
-p{
-    font-family: "Roboto", serif;
+h2{
+    margin-top: 1.7rem;
+    margin-left: 9rem;
+    font-family: "Manrope", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f0f0f0;
+}
+
+.contentContainer p{
+    display: flex;
+    width: 17rem;
+    font-family: "Manrope", sans-serif;
     font-size: 0.7rem;
     font-weight: 400;
-    color: #BDBDBD;
+    color: #ADADAD;
 }
 
 .buttonContainer{
@@ -89,4 +103,20 @@ p{
 
 .buttonContainer img{
   padding:0.38rem;  
+}
+
+.buttonEdit{
+  position:absolute;
+
+  margin-top: 1.3rem;
+  margin-left: 19rem;
+
+  cursor:pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.buttonEdit img{
+ width: 1.7rem;
+ height: 1.7rem;
 }
