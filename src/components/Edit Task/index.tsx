@@ -36,11 +36,11 @@ export function EditTask({
       <div className={styles.formContainer}>
         <div className={styles.titleContainer} >
           <p>Título</p>
-          <input className={styles.inputText} value={valueTitle} type="text" onChange={onChangeTitle}/>
+          <input maxLength={15} className={styles.inputText} value={valueTitle} type="text" onChange={onChangeTitle}/>
         </div>
         <div className={styles.descriptionContainer}>
           <p>Descrição</p>
-          <textarea value={valueDescription}className={styles.textAreaDescription} onChange={onChangeDescription}></textarea>
+          <textarea maxLength={200} value={valueDescription}className={styles.textAreaDescription} onChange={onChangeDescription}></textarea>
         </div>
         <div className={styles.colorContainer}>
           <p>Cor</p>

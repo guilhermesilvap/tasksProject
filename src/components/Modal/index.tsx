@@ -30,7 +30,7 @@ export function Modal({
       </div>
       <div className={styles.textAreaContainer}>
         <p>Descrição</p>
-        <textarea maxLength={70} onChange={onChangeDescription} />
+        <textarea maxLength={200} onChange={onChangeDescription} />
       </div>
 
       <div className={styles.containerColor}>

@@ -51,13 +51,17 @@ export function ListTasks() {
   function handleSaveEdit() {
     if (!editingTask) return
 
+    if(description.length === 0 || title.length === 0 || color.length === 0 ){
+      return alert("Preencha todos os campos para salvar a edição")
+    }
+
     const updatedTasks = tasks.map((task) =>
       task.id === editingTask.id ? { ...task, title, description, color } : task
     )
 
     setTasks(updatedTasks)
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks))
-
+    saveTasks(updatedTasks)
+     
 
      setEditingTask(null);
      setTitle("");

@@ -30,7 +30,7 @@
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-  background: #555;          /* Cor ao passar o mouse */
+  background: #555;  
 }
 .cardTasks{
    display: flex;
@@ -42,11 +42,12 @@
    background-color: #1C1C1C;
    overflow-wrap:anywhere;
    margin-top: 1.2rem;
-   margin-left: 0.70rem;
+   margin-left:3%;
 }
 
 .contentContainer{
   display: flex;
+  
 }
 
 .colorIndicator{
@@ -57,20 +58,20 @@
 }
 
 .taskContent{
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
+  margin-top: 5%;
 }
 
 h3{
     font-family: "Manrope", sans-serif;
     font-size: 1rem;
+    margin-left: 5%;
     font-weight: 200;
     color: #f0f0f0;
 }
 
 h2{
     margin-top: 1.7rem;
-    margin-left: 9rem;
+    margin-left: 40%;
     font-family: "Manrope", sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
@@ -78,23 +79,27 @@ h2{
 }
 
 .contentContainer p{
-    display: flex;
-    width: 17rem;
+    width: 14rem;
+    height: 2rem;
     font-family: "Manrope", sans-serif;
     font-size: 0.7rem;
     font-weight: 400;
     color: #ADADAD;
+    margin-left: 5%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .buttonContainer{
-  top:88%;
+  top: 34.6rem;
   position:absolute;
-  margin-left: 18rem;
-
+  
+  margin-left: 19rem;
   cursor:pointer;
 
-  width: 3.60rem;
-  height: 3.60rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   border: none;
   background-color: #333333;

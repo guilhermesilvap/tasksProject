@@ -79,6 +79,24 @@ p{
     padding: 1rem;
 }
 
+.textAreaDescription::-webkit-scrollbar{
+    width: 0.4rem;
+    height: 0.2rem;
+}
+
+.textAreaDescription::-webkit-scrollbar-track {
+  background: #1C1C1C;     
+}
+
+.textAreaDescription::-webkit-scrollbar-thumb {
+  background-color: grey;   
+  border-radius: 10px;     
+}
+
+.textAreaDescription::-webkit-scrollbar-thumb:hover {
+  background: #555;  
+}
+
 .item{
     cursor: pointer;
     border:none;

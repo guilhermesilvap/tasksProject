@@ -14,7 +14,7 @@
   position: absolute;
   margin-left:2rem;
   
-  top:17%;
+  top:4rem;
 
   width: 19rem;
   height: 30rem;
@@ -88,6 +88,23 @@
     padding: 1rem;
 }
 
+.container textarea::-webkit-scrollbar{
+    width: 0.4rem;
+    height: 0.2rem;
+}
+
+.container textarea::-webkit-scrollbar-track {
+  background: #1C1C1C;     
+}
+
+.container textarea::-webkit-scrollbar-thumb {
+  background-color: grey;   
+  border-radius: 10px;     
+}
+
+.container textarea::-webkit-scrollbar-thumb:hover {
+  background: #555;  
+}
 .containerColor p{
  font-family: "Manrope", sans-serif;
  font-size: 1rem;
