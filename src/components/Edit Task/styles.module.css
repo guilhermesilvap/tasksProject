@@ -1,7 +1,7 @@
 .container{
     position:fixed;
     top:0;
-    width: 23rem;
+    width: 100%;
     height: 100vh;
     background-color: #1A1A1A;   
     padding-right: 2rem;
@@ -9,9 +9,16 @@
     overflow-x: hidden;
 }
 
+ .contentHeader{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    
+    display: flex;
+    gap: 6rem;
+}
+
 .exitButton{
     cursor: pointer;
-    margin-top: 1.75rem;
     margin-left: 1rem;
     background: transparent;
     border: none;
@@ -20,24 +27,18 @@
 }
 
 .editTaskTitle{
-    margin-top: 1.75rem;
-    margin-left: 1.65rem;
-
+    margin-left: 1.40rem;
+    white-space:nowrap;
     font-family: "Manrope", sans-serif;
-    font-weight: bold;
+    font-weight:bold;
     font-size: 1rem;
     color: #FFFFFF;
 }
 
 .formContainer{
-    margin-top: 2rem;
     margin-left: 1.65rem;
 }
 
-header{
-    display: flex;
-    gap: 4.5rem;
-}
 
 p{
     color:#FFFFFF;
@@ -106,11 +107,18 @@ p{
     margin-left: 1.25rem;
 }
 
+.buttonContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
 .saveTasks{
     color: #FFFFFF;
     background-color: #000000;
     margin-left: 1rem;
-    margin-top:6rem;
     border:none;
     cursor: pointer;
     width:100%;
@@ -120,4 +128,53 @@ p{
 
 .saveTasks:hover{
     background-color: #0e0d0d;
+}
+
+.buttonDelete{
+    color: #FFFFFF;
+    background-color: #000000;
+    margin-left: 1rem;
+    border:none;
+    cursor: pointer;
+    width:100%;
+    height: 3rem;
+    border-radius: 2rem;
+}
+
+.buttonDelete:hover{
+    background-color: #0e0d0d;
+}
+
+@media (min-width: 768px) {
+
+    .container{
+    border-radius: 1.4rem;    
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 2rem;
+    width: 60rem;
+    height: 85vh;
+    background-color: #1A1A1A;   
+    padding-right: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    }
+
+    header{
+    margin-bottom: 2rem;
+    
+    display: flex;
+    gap: 4.5rem;
+}
+
+    .editTaskTitle{
+    margin-left: 14rem;
+
+    font-family: "Manrope", sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #FFFFFF;
+}
 }

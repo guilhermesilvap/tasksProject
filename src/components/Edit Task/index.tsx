@@ -11,9 +11,9 @@ type Props = {
   onChangeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   editTask: () => void
   closeEdit: () => void
+  deleteTask: () => void
   valueColor: string
-
-}
+} 
 
 export function EditTask({
   colors,
@@ -24,23 +24,36 @@ export function EditTask({
   closeEdit,
   valueTitle,
   valueDescription,
-  valueColor
+  valueColor,
+  deleteTask
 }: Props) {
- 
   return (
     <div className={styles.container}>
-      <header>
-        <button className={styles.exitButton} onClick={closeEdit}><img src={exitimg} alt="" /></button>
+      <div className={styles.contentHeader}>
+        <button className={styles.exitButton} onClick={closeEdit}>
+          <img src={exitimg} alt="" />
+        </button>
         <h3 className={styles.editTaskTitle}>Editar tarefa</h3>
-      </header>
+      </div>
       <div className={styles.formContainer}>
-        <div className={styles.titleContainer} >
+        <div className={styles.titleContainer}>
           <p>Título</p>
-          <input maxLength={15} className={styles.inputText} value={valueTitle} type="text" onChange={onChangeTitle}/>
+          <input
+            maxLength={15}
+            className={styles.inputText}
+            value={valueTitle}
+            type="text"
+            onChange={onChangeTitle}
+          />
         </div>
         <div className={styles.descriptionContainer}>
           <p>Descrição</p>
-          <textarea maxLength={200} value={valueDescription}className={styles.textAreaDescription} onChange={onChangeDescription}></textarea>
+          <textarea
+            maxLength={200}
+            value={valueDescription}
+            className={styles.textAreaDescription}
+            onChange={onChangeDescription}
+          ></textarea>
         </div>
         <div className={styles.colorContainer}>
           <p>Cor</p>
@@ -52,15 +65,21 @@ export function EditTask({
                 onClick={() => onSelect(color)}
                 style={{
                   background: color,
-                  outline:
-                    valueColor === color ? "5px solid grey" : "none",
+                  outline: valueColor === color ? "5px solid grey" : "none",
                 }}
               ></button>
             )
           })}
         </div>
       </div>
-      <button className={styles.saveTasks} onClick={editTask}>Salvar</button>
+      <div className={styles.buttonContainer}>
+      <button className={styles.saveTasks} onClick={editTask}>
+        Salvar
+      </button>
+      <button onClick={deleteTask} className={styles.buttonDelete}>
+        Excluir
+      </button>
+      </div>
     </div>
   )
 }

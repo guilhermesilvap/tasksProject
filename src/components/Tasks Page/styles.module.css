@@ -1,16 +1,33 @@
 .container{
-    width: 23rem;
+    width: 100%;
     height: 100vh;
-    background-color: #1A1A1A;   
-    padding-right: 2rem;
-    overflow-y: auto;
+    display: flex;
+    padding-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a1a;
     overflow-x: hidden;
+    
+}
+
+.headerContent{
+  display: flex;
+  gap:13rem;
+  padding-bottom: 3rem;
+}
+
+.subtitle{
+   margin-top: 1.7rem;
+    font-family: "Manrope", sans-serif;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    color: #f0f0f0;
 }
 
 .noTasks{
+  padding: 2rem;
   margin-top: 2rem;
   text-indent: 0.6rem;
-  margin-left: 2.5rem;
   font-size: 0.8rem;
   font-weight: bold;
 }
@@ -35,9 +52,10 @@
 .cardTasks{
    display: flex;
    position: relative;
-   flex-wrap: wrap;
    width: 21.8rem;
    height: 4.3rem;
+   align-items:center;
+   justify-content: space-between;
    border-radius: 0.8rem;
    background-color: #1C1C1C;
    overflow-wrap:anywhere;
@@ -57,11 +75,19 @@
     width: 0.8rem;
 }
 
+
 .taskContent{
   margin-top: 5%;
 }
 
-h3{
+.completedTaskContent{
+    margin-top: 5%;
+}
+
+
+
+
+.taskContent h3{
     font-family: "Manrope", sans-serif;
     font-size: 1rem;
     margin-left: 5%;
@@ -69,16 +95,24 @@ h3{
     color: #f0f0f0;
 }
 
+.completedTaskContent h3{
+   font-family: "Manrope", sans-serif;
+   text-decoration: line-through;
+   font-size: 1rem;
+   margin-left: 5%;
+   font-weight: 200;
+   color: #555555;
+}
+
 h2{
     margin-top: 1.7rem;
-    margin-left: 40%;
     font-family: "Manrope", sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
     color: #f0f0f0;
 }
 
-.contentContainer p{
+.taskContent p{
     width: 14rem;
     height: 2rem;
     font-family: "Manrope", sans-serif;
@@ -91,11 +125,26 @@ h2{
     text-overflow: ellipsis;
 }
 
+.completedTaskContent p{
+    width: 14rem;
+    height: 2rem;
+    text-decoration: line-through;
+    font-family: "Manrope", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #555555;
+    margin-left: 5%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .buttonContainer{
   bottom: 0.8rem;
-  position:absolute;
+  position:fixed;
   
-  margin-left: 19rem;
+  margin-left: 20rem;
   cursor:pointer;
 
   width: 3rem;
@@ -106,15 +155,51 @@ h2{
   color: white;
 }
 
+.concludedTasksButton{
+  cursor: pointer;
+  margin-top: 1.3rem;
+  background-color: transparent;
+  border: none;
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+.concludedTasksButton img{
+  width: 2rem;
+  height: 2rem;
+}
+
+
+.concludedTasksButton img:hover{
+  transform: scale(1.10);
+}
+
+.tasksListButton{
+  cursor: pointer;
+   margin-top: 1.3rem;
+  background-color: transparent;
+  border: none;
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+.tasksListButton img{
+  width: 2rem;
+  height: 2rem;
+}
+
+.tasksListButton img:hover{
+  transform: scale(1.10);
+}
+
 .buttonContainer img{
   padding:0.38rem;  
 }
 
 .buttonEdit{
   position:absolute;
-
-  margin-top: 1.3rem;
-  margin-left: 19rem;
+  
+  margin-left: 18.5rem;
 
   cursor:pointer;
   background-color: transparent;
@@ -122,6 +207,80 @@ h2{
 }
 
 .buttonEdit img{
- width: 1.7rem;
- height: 1.7rem;
+ width: 1.2rem;
+ height: 1.2rem;
+}
+
+.buttonEdit img:hover{
+  transform: calc(1.05);
+}
+
+.buttonComplete{
+  cursor: pointer;
+  background-color: transparent;
+  border:none;
+  margin-right: 0.6rem;
+}
+
+.buttonComplete img{
+ width: 1.2rem;
+ height: 1.2rem;
+}
+
+.iconWrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.path {
+  fill: white;
+  transition: fill 0.3s ease;
+}
+
+
+@media (min-width: 768px) {
+
+  .container {
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 50rem;
+    height: 80vh;
+  
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border-radius: 1.4rem;
+    background-color: #1a1a1a;
+
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .headerContent{
+    gap:30rem;
+  }
+  
+  .container h2{
+      margin-top: 2rem;
+   }
+
+  .buttonContainer{
+  position: fixed;  
+  cursor:pointer;
+  bottom:6.5rem;
+  right:18.5rem;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #333333;
+  color: white;
+}
 }
