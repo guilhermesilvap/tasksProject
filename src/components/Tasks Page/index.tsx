@@ -218,6 +218,7 @@ export function ListTasks() {
       </button>
       {modal && (
         <Modal
+          closeModal={handleModal}
           createTask={() => {
             if (description === "") {
               return alert(

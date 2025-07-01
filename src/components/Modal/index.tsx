@@ -1,5 +1,6 @@
 import styles from "./styles.module.css"
 import { useState } from "react"
+import exitbutton from "../../assets/exit.svg"
 
 type Props = {
   colors: string[]
@@ -7,6 +8,7 @@ type Props = {
   onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   createTask: () => void
+  closeModal: () => void
 }
 
 export function Modal({
@@ -15,6 +17,7 @@ export function Modal({
   onChangeTitle,
   onChangeDescription,
   createTask,
+  closeModal
 }: Props) {
   const [selectedColor, setSelectedColor] = useState<string | null>(null)
 
@@ -24,6 +27,7 @@ export function Modal({
   }
   return (
     <div className={styles.container}>
+      <button onClick={closeModal} className={styles.exitButton}><img src={exitbutton} alt="Sair do modal" /></button>
       <div className={styles.titleContainer}>
         <p>Título</p>
         <input maxLength={15} type="text" onChange={onChangeTitle} />
