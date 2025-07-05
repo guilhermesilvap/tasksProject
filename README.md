@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# 📝 Gerenciador de Tarefas Pessoais
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto **responsivo** de gerenciamento de tarefas desenvolvido com **React + TypeScript**, voltado para uso pessoal. Ele permite que o usuário crie, edite, conclua e acompanhe o histórico de suas tarefas de forma simples e organizada.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔍 Funcionalidades
 
-## Expanding the ESLint configuration
+- ✅ Criar novas tarefas com título e descrição
+- 🛠️ Editar tarefas existentes
+- ✅ Marcar tarefas como concluídas
+- 📊 Visualizar o **histórico de tarefas concluídas**
+- 💻 Responsivo: funciona bem em dispositivos móveis e desktops
+- 🔒 Dados armazenados localmente (LocalStorage)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📸 Imagens do Projeto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> 🖼️ Adicione aqui as imagens do projeto (use `![descrição](caminho-da-imagem)` ou arraste as imagens no GitHub):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Tela Principal
+![Tela principal 1](https://github.com/user-attachments/assets/73f31251-8719-43cc-b12a-ff9800ae2a7e)
+![Tela principal 2](https://github.com/user-attachments/assets/343d0d03-8adc-42c6-8d8f-57cef26af8e7)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
+
+### Criar Tarefa
+![Criar tarefa](https://github.com/user-attachments/assets/3cbbf5c0-c17a-48f5-8199-cac0d410f409)
+
+
+### Histórico de Concluídas
+![Tarefas concluídas](https://github.com/user-attachments/assets/dd07587c-b68c-4b13-82fe-171dc6c8680e)
+
+
+---
+
+## 🧪 Tecnologias Utilizadas
+
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [CSS Modules](https://github.com/css-modules/css-modules) ou Tailwind CSS (dependendo de qual usou)
+- LocalStorage (para persistência local)
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/nome-do-projeto.git
+
+# Acesse a pasta do projeto
+cd nome-do-projeto
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
+npm run dev
