@@ -155,7 +155,7 @@
   top:2rem;
 
   width: 19rem;
-  height: 30rem;
+  height: 90%;
 
   background-color:#1A1A1A;
   border-radius:2.30rem;
@@ -168,7 +168,7 @@
     border:none;
     cursor: pointer;
     width:70%;
-    height: 5rem;
+    height: 3rem;
     border-radius: 2rem;
 }
 

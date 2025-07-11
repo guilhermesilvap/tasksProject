@@ -13,6 +13,10 @@
 
 
 .listContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:25rem;
   height: 80vh;
   overflow-y: scroll;
   overflow-x: hidden ;
@@ -86,7 +90,7 @@
    display: flex;
    position: relative;
    width: 21.8rem;
-   height: 4.3rem;
+   height: 4.4rem;
    align-items:center;
    justify-content: space-between;
    border-radius: 0.8rem;
@@ -104,12 +108,12 @@
 .colorIndicator{
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
-    height: 4.3rem;
+    height: 4.4rem;
     width: 0.8rem;
 }
 
 .taskContent{
-  margin-top: 5%;
+  margin-top: 3%;
 }
 
 .completedTaskContent{
@@ -171,7 +175,7 @@ h2{
 
 .buttonContainer{
   position:absolute;
-  bottom:1rem;
+  bottom:3rem;
   right:0.6rem;
 
   cursor:pointer;
@@ -279,7 +283,7 @@ h2{
     margin: 0 auto;
     width: 50rem;
     height: 80vh;
-  
+      
 
     overflow-y: auto;
     overflow-x: hidden;
@@ -293,6 +297,10 @@ h2{
   } 
 
   .listContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:26rem;
     overflow-y: scroll;
     overflow-x: hidden;
   }
@@ -312,7 +320,7 @@ h2{
   .buttonContainer{
   position: absolute;  
   cursor:pointer;
-  bottom:1rem;
+  bottom:2rem;
   right:1.5rem;
 
   width: 3rem;
