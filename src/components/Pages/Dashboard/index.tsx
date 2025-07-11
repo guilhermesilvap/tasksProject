@@ -5,7 +5,7 @@ import concludedtasks from "../../../assets/concluded-tasks.svg"
 import taskslist from "../../../assets/tasks-list.svg"
 import completetask from "../../../assets/complete.svg"
 import logoutImg from "../../../assets/logout.svg"
-import { useAuth } from "../../../hooks/UseAuth"
+import { useAuth } from "../../../hooks/useAuth"
 import { api } from "../../../api/api"
 import type { Task } from "../../../types/typing"
 import { useState } from "react"
@@ -89,7 +89,7 @@ export function ListTasks() {
       return
     }
 
-    console.log(data)
+    
     await api.put(`/tasks/${editingTask?.id}`, data)
     setOpenEdit(false)
     navigate(0)
@@ -102,7 +102,6 @@ export function ListTasks() {
   function addTask() {
     try {
       const data = taskSchema.parse({ title, description, color })
-      console.log(data)
       api.post("/tasks", data)
     } catch (error) {
       if (error instanceof ZodError) {
@@ -113,6 +112,7 @@ export function ListTasks() {
         setErrorMsg(error.response?.data.message)
       }
     }
+    console.log(errorMsg)
     navigate(0)
   }
 

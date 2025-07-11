@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./styles.module.css"
 import { useNavigate } from "react-router"
-import { useAuth } from "../../../hooks/UseAuth"
+import { useAuth } from "../../../hooks/useAuth"
 import { api } from "../../../api/api"
 import { z, ZodError } from "zod"
 import { AxiosError } from "axios"
@@ -32,11 +32,11 @@ export function Login() {
 
       auth.createSession(response.data)
     } catch (error) {
-      console.log(error)
+      
 
       if (error instanceof ZodError) {
         setErrorMsg(error.issues[0].message)
-        console.log(errorMsg)
+        
       }
 
       if (error instanceof AxiosError) {

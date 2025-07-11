@@ -39,7 +39,7 @@ export function SignUp() {
     } catch (error) {
       if(error instanceof ZodError){
         setErrorMsg(error.issues[0].message)
-        console.log(errorMsg)
+        
       }
       if(error instanceof AxiosError){
         setErrorMsg(error.response?.data.message)

@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router"
-import { useAuth } from "../hooks/UseAuth"
+import { useAuth } from "../hooks/useAuth"
 import { AuthRoutes } from "./AuthRoutes"
 import { DashboardRoutes } from "./DashboardRoutes"
 
