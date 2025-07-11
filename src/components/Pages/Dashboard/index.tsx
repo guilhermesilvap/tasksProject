@@ -99,10 +99,10 @@ export function ListTasks() {
     setModal(!modal)
   }
 
-  function addTask() {
+  async function addTask() {
     try {
       const data = taskSchema.parse({ title, description, color })
-      api.post("/tasks", data)
+      await api.post("/tasks", data)
     } catch (error) {
       if (error instanceof ZodError) {
         setErrorMsg(error.issues[0].message)
@@ -110,9 +110,9 @@ export function ListTasks() {
 
       if (error instanceof AxiosError) {
         setErrorMsg(error.response?.data.message)
+        console.log(errorMsg)
       }
     }
-    console.log(errorMsg)
     navigate(0)
   }
 
