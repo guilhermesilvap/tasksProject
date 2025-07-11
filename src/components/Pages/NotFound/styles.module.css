@@ -1,0 +1,19 @@
+.notFoundText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.notFoundText h1{
+    margin-top: 2rem;
+    color: white;
+    font-family: "Manrope", sans-serif;
+    font-weight: bold;
+}
+
+.notFoundText h3{
+    color: white;
+    font-family: "Manrope", sans-serif;
+    font-weight: lighter;
+}

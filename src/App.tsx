@@ -1,10 +1,12 @@
-import { ListTasks } from "./components/Tasks Page"
+import { AuthProvider } from "./contexts/AuthContext"
+import { Routes } from "./routes/index"
+
 
 function App() {
   return (
-    <div >
-      <ListTasks />
-    </div>
+    <AuthProvider>
+      <Routes/>
+    </AuthProvider>
   )
 }
 

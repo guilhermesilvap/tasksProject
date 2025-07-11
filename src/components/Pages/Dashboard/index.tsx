@@ -1,22 +1,37 @@
 import styles from "./styles.module.css"
-import taskimg from "../../assets/task.svg"
-import plusimg from "../../assets/plus.svg"
-import concludedtasks from "../../assets/concluded-tasks.svg"
-import taskslist from "../../assets/tasks-list.svg"
-import completetask from "../../assets/complete.svg"
-import type { Task } from "../../types/typing"
+import taskimg from "../../../assets/task.svg"
+import plusimg from "../../../assets/plus.svg"
+import concludedtasks from "../../../assets/concluded-tasks.svg"
+import taskslist from "../../../assets/tasks-list.svg"
+import completetask from "../../../assets/complete.svg"
+import logoutImg from "../../../assets/logout.svg"
+import { useAuth } from "../../../hooks/UseAuth"
+import { api } from "../../../api/api"
+import type { Task } from "../../../types/typing"
 import { useState } from "react"
-import { Modal } from "../Modal"
-import { loadTasks, saveTasks } from "../../utils/storage"
-import {
-  saveConcludedTasks,
-  loadConcludedTasks,
-} from "../../utils/concludeTasksStorage"
+import { Modal } from "../../Modal"
+import { useNavigate } from "react-router"
 import { useEffect } from "react"
-import { EditTask } from "../Edit Task"
+import { EditTask } from "../../Edit Task"
+import { z, ZodError } from "zod"
+import { AxiosError } from "axios"
+
+const taskSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  color: z.string(),
+})
+
+const colorsMap: Record<string, string> = {
+  red: "#DC2127",
+  green: "#7AE7BF",
+  blue: "#A4BDFC",
+  orange: "#FF887C",
+}
 
 export function ListTasks() {
   const COLORS = ["#DC2127", "#7AE7BF", "#A4BDFC", "#FF887C"]
+  const navigate = useNavigate()
 
   const [title, setTitle] = useState<string>("")
   const [description, setDescription] = useState<string>("")
@@ -29,82 +44,95 @@ export function ListTasks() {
   const [toggleTasks, setToggleTasks] = useState<
     "activeTasks" | "concludedTasks"
   >("activeTasks")
+  const [errorMsg, setErrorMsg] = useState("")
+  const auth = useAuth()
 
   useEffect(() => {
-    const tasksCompletedSaved = loadConcludedTasks()
-    const saved = loadTasks()
-    setTasks(saved)
-    setCompletedTasks(tasksCompletedSaved)
+    loadCompletedTasks()
+    loadTasks()
   }, [])
 
-  function handleEdit(taskID: string) {
+  async function loadTasks() {
+    const response = await api.get("/tasks?status=pending")
+
+    setTasks(response.data)
+  }
+
+  async function logout() {
+    auth.logout()
+
+    navigate("/")
+  }
+
+  async function loadCompletedTasks() {
+    const response = await api.get("/tasks?status=completed")
+
+    setCompletedTasks(response.data)
+  }
+
+  async function handleEdit(taskID: string) {
+    setOpenEdit(true)
     const taskToEdit = tasks.find((task) => task.id === taskID)
 
-    if (taskToEdit) {
-      setEditingTask(taskToEdit)
-      setDescription(taskToEdit.description)
-      setColor(taskToEdit.color)
-      setTitle(taskToEdit.title)
-      setOpenEdit(!openEdit)
+    if (!taskToEdit) {
+      return
     }
+    setEditingTask(taskToEdit)
+    setColor(taskToEdit.color)
+    setTitle(taskToEdit.title)
+    setDescription(taskToEdit.description)
+  }
+
+  async function editTask() {
+    const data = taskSchema.parse({ title, description, color })
+    if (!editingTask) {
+      return
+    }
+
+    console.log(data)
+    await api.put(`/tasks/${editingTask?.id}`, data)
+    setOpenEdit(false)
+    navigate(0)
   }
 
   function handleModal() {
     setModal(!modal)
   }
 
-  function addTask(task: Omit<Task, "id">) {
-    const newTask: Task = { id: crypto.randomUUID(), ...task }
-    const updatedTask = [...tasks, newTask]
-    saveTasks(updatedTask)
-    setTasks(updatedTask)
+  function addTask() {
+    try {
+      const data = taskSchema.parse({ title, description, color })
+      console.log(data)
+      api.post("/tasks", data)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        setErrorMsg(error.issues[0].message)
+      }
+
+      if (error instanceof AxiosError) {
+        setErrorMsg(error.response?.data.message)
+      }
+    }
+    navigate(0)
   }
 
-  function addCompleteTask(taskID: string) {
-    const confirm = window.confirm("Você está concluindo a tarefa selecionada, deseja confirmar?")
-    const newCompletedTask: Task | undefined = tasks.find(
-      (task) => task.id === taskID
+  async function addCompleteTask(taskID: string) {
+    const confirm = window.confirm(
+      "Você está concluindo a tarefa selecionada, deseja confirmar?"
     )
 
-    if (!newCompletedTask) {
-      return
+    const data = {
+      status: "completed",
     }
-    const updatedTasks: Task[] = [...completedTasks, newCompletedTask]
+
     if (confirm) {
-      const deleteTaskfromTasks = tasks.filter(
-        (task: Task) => task.id !== taskID
-      )
-
-      setTasks(deleteTaskfromTasks)
-      saveTasks(deleteTaskfromTasks)
-
-      setCompletedTasks(updatedTasks)
-      saveConcludedTasks(updatedTasks)
-    }
-  }
-
-  function handleSaveEdit() {
-    if (!editingTask) return
-
-    if (description.length === 0 || title.length === 0 || color.length === 0) {
-      return alert("Preencha todos os campos para salvar a edição")
+      await api.put(`/tasks/${taskID}`, data)
     }
 
-    const updatedTasks = tasks.map((task) =>
-      task.id === editingTask.id ? { ...task, title, description, color } : task
-    )
-
-    setTasks(updatedTasks)
-    saveTasks(updatedTasks)
-
-    setEditingTask(null)
-    setTitle("")
-    setDescription("")
-    setColor("")
-    setOpenEdit(!openEdit)
+    navigate(0)
   }
 
-  function deleteTask(taskID: string) {
+  async function deleteTask(taskID: string) {
     const confirm = window.confirm(
       "Você tem certeza que gostaria de deletar essa task?"
     )
@@ -112,10 +140,10 @@ export function ListTasks() {
       return
     }
 
-    const updatedTasks = tasks.filter((task: Task) => task.id !== taskID)
+    await api.delete(`/tasks/${taskID}`)
 
-    setTasks(updatedTasks)
-    saveTasks(updatedTasks)
+    loadTasks()
+
     setOpenEdit(false)
   }
 
@@ -123,21 +151,26 @@ export function ListTasks() {
     <div className={styles.container}>
       <div className={styles.headerContent}>
         <h2>MyTasks</h2>
-        {toggleTasks === "activeTasks" ? (
-          <button
-            onClick={() => setToggleTasks("concludedTasks")}
-            className={styles.concludedTasksButton}
-          >
-            <img src={concludedtasks} alt="Acessar tarefas concluídas" />
+        <div className={styles.buttonsHeaderContainer}>
+          {toggleTasks === "activeTasks" ? (
+            <button
+              onClick={() => setToggleTasks("concludedTasks")}
+              className={styles.concludedTasksButton}
+            >
+              <img src={concludedtasks} alt="Acessar tarefas concluídas" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setToggleTasks("activeTasks")}
+              className={styles.tasksListButton}
+            >
+              <img src={taskslist} alt="Acessar tarefas ativas" />
+            </button>
+          )}
+          <button onClick={() => logout()} className={styles.logoutButton}>
+            <img src={logoutImg} alt="" />
           </button>
-        ) : (
-          <button
-            onClick={() => setToggleTasks("activeTasks")}
-            className={styles.tasksListButton}
-          >
-            <img src={taskslist} alt="Acessar tarefas ativas" />
-          </button>
-        )}
+        </div>
       </div>
 
       {tasks.length > 0 && toggleTasks == "activeTasks" ? (
@@ -169,13 +202,14 @@ export function ListTasks() {
       ) : (
         <></>
       )}
+      <div className={styles.listContainer}>
       {toggleTasks === "activeTasks"
         ? tasks.map((task) => (
-            <div className={styles.cardTasks}>
+            <div className={styles.cardTasks} key={task.id}>
               <div key={task.id} className={styles.contentContainer}>
                 <div
                   className={styles.colorIndicator}
-                  style={{ background: task.color }}
+                  style={{ background: colorsMap[task.color] }}
                 ></div>
                 <div className={styles.taskContent}>
                   <h3>{task.title}</h3>
@@ -200,7 +234,7 @@ export function ListTasks() {
             </div>
           ))
         : completedTasks.map((task) => (
-            <div className={styles.cardTasks}>
+            <div className={styles.cardTasks} key={task.id}>
               <div key={task.id} className={styles.contentContainer}>
                 <div
                   className={styles.colorIndicator}
@@ -213,6 +247,7 @@ export function ListTasks() {
               </div>
             </div>
           ))}
+        </div>
       <button onClick={handleModal} className={styles.buttonContainer}>
         <img src={plusimg} alt="Adicione uma nova tarefa" />
       </button>
@@ -238,13 +273,31 @@ export function ListTasks() {
               )
             }
 
-            addTask({ description, title, color, status })
+            addTask()
             setTitle("")
             setDescription("")
             setColor("")
             handleModal()
           }}
           onSelect={(selectedColor) => {
+            switch (selectedColor) {
+              case "#DC2127":
+                selectedColor = "red"
+                break
+              case "#7AE7BF":
+                selectedColor = "green"
+                break
+              case "#A4BDFC":
+                selectedColor = "blue"
+                break
+              case "#FF887C":
+                selectedColor = "orange"
+
+                break
+              default:
+                break
+            }
+
             setColor(selectedColor)
           }}
           onChangeDescription={(e) => setDescription(e.target.value)}
@@ -261,13 +314,31 @@ export function ListTasks() {
           valueTitle={title}
           valueDescription={description}
           onSelect={(color) => {
-            setColor(color)
+            switch (color) {
+              case "#DC2127":
+                setColor("red")
+                break
+              case "#7AE7BF":
+                setColor("green")
+                break
+              case "#A4BDFC":
+                setColor("blue")
+                break
+              case "#FF887C":
+                setColor("orange")
+                break
+
+              default:
+                break
+            }
           }}
-          valueColor={color}
+          valueColor={colorsMap[color]}
           colors={COLORS}
           onChangeDescription={(e) => setDescription(e.target.value)}
           onChangeTitle={(e) => setTitle(e.target.value)}
-          editTask={handleSaveEdit}
+          editTask={() => {
+            editTask()
+          }}
           closeEdit={() => setOpenEdit(!openEdit)}
         />
       )}
