@@ -305,7 +305,15 @@ h2{
     overflow-x: hidden;
   }
 
+   .buttonsHeaderContainer{
+  
+   }   
+
   .headerContent{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    width: 100%;
     gap:30rem;
   }
   

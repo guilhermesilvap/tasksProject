@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import { z, ZodError } from "zod"
+import { AxiosError } from "axios"
+
 import back from "../../../assets/back.svg"
 import styles from "./styles.module.css"
-import { z, ZodError } from "zod"
 import { api } from "../../../api/api"
-import { AxiosError } from "axios"
 
 const signUpSchema = z
   .object({
